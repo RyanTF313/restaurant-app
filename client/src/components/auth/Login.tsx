@@ -1,12 +1,14 @@
-import { useState } from 'react';
-import { useAuthStore } from '../../store/auth.store';
+import { useState } from "react";
+import { useAuthStore } from "../../store/auth.store";
+import { Navigate } from "react-router-dom";
 
 export default function Login() {
   const login = useAuthStore((s) => s.login);
   const loading = useAuthStore((s) => s.loading);
+  const user = useAuthStore((s) => s.user);
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,9 +42,10 @@ export default function Login() {
           disabled={loading}
           className="w-full bg-black text-white py-2 rounded"
         >
-          {loading ? 'Signing in...' : 'Login'}
+          {loading ? "Signing in..." : "Login"}
         </button>
       </form>
+      {user && <Navigate to="/dashboard" replace />}
     </div>
   );
 }

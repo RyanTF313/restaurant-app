@@ -4,7 +4,7 @@ export default function Index() {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Hero Section */}
-      <header className="bg-linear-to-r from-red-500 to-yellow-500 text-white py-20">
+      <header className="bg-linear-to-r from-blue-500 to-green-500 text-white py-20">
         <div className="container mx-auto px-6 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-4">
             Welcome, Eat Up!
@@ -55,7 +55,7 @@ export default function Index() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-red-500 text-white text-center">
+      <section className="py-20 bg-blue-500 text-white text-center">
         <h2 className="text-3xl md:text-5xl font-bold mb-4">
           Ready to get started?
         </h2>
@@ -64,7 +64,7 @@ export default function Index() {
         </p>
         <Link
           to="/login"
-          className="px-8 py-4 bg-black rounded-lg hover:bg-gray-900 transition"
+          className="px-6 py-3 bg-black rounded-lg hover:bg-gray-900 transition mr-3 "
         >
           Login
         </Link>

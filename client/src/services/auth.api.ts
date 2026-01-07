@@ -4,6 +4,7 @@ export interface LoginResponse {
   id: string;
   name: string;
   role: "OWNER" | "EMPLOYEE" | "USER";
+  email: string;
 }
 
 export const login = async (email: string, password: string) => {

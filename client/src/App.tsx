@@ -2,13 +2,20 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
 import Login from './components/auth/Login';
 import ProtectedRoute from './components/ProtectedRoute';
+import Dashboard from './components/Dahsboard';
 import Menu from './components/Menu';
+import { useAuthStore } from './store/auth.store';
+import { useEffect } from 'react';
 
-function Dashboard() {
-  return <div className="p-6">Owner Dashboard</div>;
-}
+
 
 export default function App() {
+  const checkAuth = useAuthStore((s) => s.checkAuthentication);
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
+
   return (
     <>
     <BrowserRouter>
