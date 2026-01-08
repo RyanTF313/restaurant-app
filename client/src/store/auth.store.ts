@@ -1,13 +1,8 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { login as loginApi, me as checkAuth } from "../services/auth.api";
+import { User } from "../types/User";
 
-type User = {
-  id: string;
-  role: "OWNER" | "EMPLOYEE" | "USER";
-  email: string;
-  name: string;
-};
 
 interface AuthState {
   user: User | null;

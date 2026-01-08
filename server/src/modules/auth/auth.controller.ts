@@ -1,18 +1,18 @@
-import type { Request, Response } from 'express';
-import { UserModel } from '../users/user.model.js';
-import { hashPassword, comparePassword } from './password.js';
-import { signToken } from './jwt.js';
+import type { Request, Response } from "express";
+import { UserModel } from "../users/user.model.js";
+import { hashPassword, comparePassword } from "./password.js";
+import { signToken } from "./jwt.js";
 
 export const registerOwner = async (req: Request, res: Response) => {
   const { name, email, password } = req.body;
 
   const exists = await UserModel.findOne({ email });
   if (exists) {
-    return res.status(409).json({ message: 'Email already in use' });
+    return res.status(409).json({ message: "Email already in use" });
   }
 
   const user = await UserModel.create({
-    role: 'OWNER',
+    role: "OWNER",
     name,
     email,
     passwordHash: await hashPassword(password),
@@ -26,12 +26,12 @@ export const login = async (req: Request, res: Response) => {
 
   const user = await UserModel.findOne({ email });
   if (!user) {
-    return res.status(401).json({ message: 'Invalid credentials' });
+    return res.status(401).json({ message: "Invalid credentials" });
   }
 
   const valid = await comparePassword(password, user.passwordHash);
   if (!valid) {
-    return res.status(401).json({ message: 'Invalid credentials' });
+    return res.status(401).json({ message: "Invalid credentials" });
   }
 
   const token = signToken({
@@ -39,15 +39,16 @@ export const login = async (req: Request, res: Response) => {
     role: user.role,
   });
 
-  res.cookie('accessToken', token, {
+  res.cookie("accessToken", token, {
     httpOnly: true,
     secure: false, // true in prod
-    sameSite: 'lax',
+    sameSite: "lax",
   });
 
   res.json({
     id: user._id,
     role: user.role,
     name: user.name,
+    email: user.email,
   });
 };
